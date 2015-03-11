@@ -944,8 +944,11 @@ BarGraph.prototype.draw = function (object) {
         this.lineWidth = (object.hasOwnProperty("lineWidth")) ? object.lineWidth : (this.lineWidth) ? this.lineWidth : 0;
         this.borderColor = (object.hasOwnProperty("borderColor")) ? object.borderColor : (this.borderColor) ? this.borderColor : "#000";
         this.grouped = (object.hasOwnProperty("grouped")) ? object.grouped : this.grouped;
-        if (!this.grouped && !object.hasOwnProperty("maxY") && this.data.length > 1) {
-            this.maxY *= this.data.length;
+        if (!this.grouped && this.data.length > 1) {
+            if (!object.hasOwnProperty("maxY"))
+                this.maxY *= this.data.length;
+            if (!object.hasOwnProperty("minY") && this.minY < 0)
+                this.minY *= this.data.length;
             var newRange = Math.abs(this.maxY - this.minY);
             if (newRange % this.unitStepY != 0) {
                 if (newRange <= 5)
