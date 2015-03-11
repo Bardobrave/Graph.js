@@ -9,6 +9,8 @@ This is yet at an early stage, it's fully functional but it lacks proper testing
 
 I'll try to maintain code extensely commented (also, I'll try to comment it in english). When I achieve a final release I'll also provide minified files.
 
+Graph.js uses HTML5 canvas to draw, so you'll need compatible browsers to use it. It's been tested so far on last versions of Chrome and Firefox.
+
 # How to use it
 
 You can include into your project the whole library AllGraph.js, or you can include just the files for the graphs you're going to use, being Graph.js mandatory in each page where you want to draw graphs.
@@ -20,8 +22,8 @@ Once you have included the files you are ready to add Graphs to your page. Just 
 Graphs will fit by default to container's width and resize with the window automatically (however you can change those default behaviours).
 
 
+#Global Graph options
 <table id="Graph_options">
-	<title>Graph options</title>
 	<thead>
 		<tr>
 			<th>Option</th>
@@ -243,8 +245,9 @@ Graphs will fit by default to container's width and resize with the window autom
 	</tbody>
 </table>
 
+
+#Linear graphs
 <table id="LinearGraph_options">
-	<title>LinearGraph options</title>
 	<thead>
 		<tr>
 			<tr>
@@ -310,8 +313,9 @@ Graphs will fit by default to container's width and resize with the window autom
 	</tbody>
 </table>
 
+#Bar Graphs
+
 <table id="BarGraph_options">
-	<title>BarGraph options</title>
 	<thead>
 		<tr>
 			<tr>
@@ -395,8 +399,10 @@ Graphs will fit by default to container's width and resize with the window autom
 	</tbody>
 </table>
 
+#Sector Graphs
+
 <table id="SectorGraph_options">
-	<title>SectorGraph options</title>
+
 	<thead>
 		<tr>
 			<tr>
@@ -463,8 +469,9 @@ Graphs will fit by default to container's width and resize with the window autom
 	</tbody>
 </table>
 
+#Gantt Diagrams
+
 <table id="GanttGraph_options">
-	<title>GanttGraph options</title>
 	<thead>
 		<tr>
 			<tr>
