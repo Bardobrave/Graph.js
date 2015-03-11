@@ -433,6 +433,8 @@ Specific features
 	<li>Graphs can be drawn as pie charts or as ring charts</li>
 </ul>
 
+<a href="http://jsfiddle.net/bardobrave/877n46cL/" target="_blank">Fiddle with examples</a>
+
 <table id="SectorGraph_options">
 
 	<thead>
