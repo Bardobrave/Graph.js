@@ -153,7 +153,7 @@ Graph.prototype = (function () {
                 if (this.isDateX) {
                     var daysToLastMonth = 0, daysToLastYear = 0, daysFromMinToToday = 0;
                     var fechaIni = new Date(this.minX * 86400000), fechaFin = new Date(this.maxX * 86400000);
-                    var monthLabelSize = (this.dateStepX.indexOf("narrow") != -1) ? "narrow" : (this.dateStepY.indexOf("short") != -1)
+                    var monthLabelSize = (this.dateStepX.indexOf("narrow") != -1) ? "narrow" : (this.dateStepX.indexOf("short") != -1)
                         ? "short" : "long";
                     for (var dateToday = new Date(fechaIni) ; dateToday <= fechaFin; dateToday.setDate(dateToday.getDate() + 1)) {
                         if (this.dateStepX.indexOf("days") != -1) {
