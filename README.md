@@ -336,8 +336,10 @@ Specific features:
 <ul>
 	<li>Graphs can be shown grouped or accumulated</li>
 	<li>Graphs can be shown on a vertical or horizontal layout</li>
+	<li>Accumulated graphs show somewhat unintuitive results when mixing data with different signs, as bars are added layer by layer and later added bars can completely hide previous ones. I'm not very sure how to fix this... I doubt even this is actually some kind of error... but I'm looking for a way to fix it</li>
 </ul>
 
+<a href="http://jsfiddle.net/bardobrave/exqLtyme/" target="_blank">Fiddle with examples (unintuitive different sign bars included)</a>
 
 <table id="BarGraph_options">
 	<thead>
