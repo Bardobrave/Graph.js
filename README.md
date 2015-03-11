@@ -12,10 +12,10 @@ I'll try to maintain code extensely commented (also, I'll try to comment it in e
 #Features
 
 <ul>
-	<li>Library independent, just plain javaScript</li>
+	<li>Library independent, just plain javaScript.</li>
 	<li>Graph.js uses HTML5 canvas to draw, so you'll need compatible browsers to use it. It's been tested so far on last versions of Chrome and Firefox.</li>
-	<li>Graphs will automatically fit container's width</li>
-	<li>Graphs resize automatically with browser's window</li>
+	<li>Graphs will automatically fit container's width.</li>
+	<li>Graphs resize automatically with browser's window, this behaviour can be disabled.</li>
 	<li>Graphs capture events for mouse move and click, and accept custom event handlers. Event handling can also be disabled</li>
 </ul>
 
@@ -331,6 +331,13 @@ Specific features:
 </table>
 
 #Bar Graphs
+
+Specific features:
+<ul>
+	<li>Graphs can be shown grouped or accumulated</li>
+	<li>Graphs can be shown on a vertical or horizontal layout</li>
+</ul>
+
 
 <table id="BarGraph_options">
 	<thead>
