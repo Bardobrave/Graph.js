@@ -247,6 +247,13 @@ Graphs will fit by default to container's width and resize with the window autom
 
 
 #Linear graphs
+
+Specific features:
+-Linear graphs can accept functions as data, building graphs with the results of applying those functions on a data range
+
+<a href="http://jsfiddle.net/bardobrave/Lwqzknba/" target="_blank">Fiddle with examples</a>
+
+
 <table id="LinearGraph_options">
 	<thead>
 		<tr>
