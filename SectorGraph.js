@@ -10,9 +10,10 @@ SectorGraph.prototype.draw = function (object) {
 
     //Método interno que dibuja la leyenda de la gráfica
     function drawLegend() {
+        this.context.font = this._font;
+        
         //Si la gráfica lleva título se dibuja también.
         if (this.title != null) {
-            this.context.font = this._font;
             this.context.textAlign = "center";
             this.context.fillText(this.title, this.canvasObj.width / 2, (this.paddingHeight + 10) / 2);
         }
