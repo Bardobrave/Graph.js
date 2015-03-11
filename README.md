@@ -504,6 +504,14 @@ Specific features
 
 #Gantt Diagrams
 
+Specific features:
+
+<ul>
+	<li>Graphs can representate different element types on the same Graph</li>
+</ul>
+
+
+
 <table id="GanttGraph_options">
 	<thead>
 		<tr>
