@@ -1,6 +1,25 @@
 # Graph.js
 Simple yet powerful js API for graphs drawing
 
+The idea behind this API is to create an easy to use tool for web developers to create graphs on their projects.
+The objective is to allow users to create a functional graph just creating an object and passing it data.
+I want also allow as many options as I can, so users can fine tune their graphs to the maximum detail possible while maintaining ease of use.
+
+This is yet at an early stage, it's fully functional but it lacks proper testing, cross-browser functionality and a good code cleaning. Feel free to use and play with it, also all feedback will be appreciated, however, keep in mind a lot of work is needed before this becomes a "release".
+
+I'll try to maintain code extensely commented (also, I'll try to comment it in english). When I achieve a final release I'll also provide minified files.
+
+# How to use it
+
+You can include into your project the whole library AllGraph.js, or you can include just the files for the graphs you're going to use, being Graph.js mandatory in each page where you want to draw graphs.
+
+This way, if you want to use linear graphs on a page but don't expect to use any other graph type, you can just include Graph.js and LinearGraph.js, while if you want to draw Gantt diagrams you should include Graph.js and GanttGraph.js
+
+Once you have included the files you are ready to add Graphs to your page. Just create an object of the proper type passing it a DOM block-level object that will act as a container and call draw method with an array of data.
+
+Graphs will fit by default to container's width and resize with the window automatically (however you can change those default behaviours).
+
+
 <table id="Graph_options">
 	<title>Graph options</title>
 	<thead>
