@@ -153,6 +153,8 @@ Graph.prototype = (function () {
                 if (this.isDateX) {
                     var daysToLastMonth = 0, daysToLastYear = 0, daysFromMinToToday = 0;
                     var fechaIni = new Date(this.minX * 86400000), fechaFin = new Date(this.maxX * 86400000);
+                    var monthLabelSize = (this.dateStepX.indexOf("narrow") != -1) ? "narrow" : (this.dateStepY.indexOf("short") != -1)
+                        ? "short" : "long";
                     for (var dateToday = new Date(fechaIni) ; dateToday <= fechaFin; dateToday.setDate(dateToday.getDate() + 1)) {
                         if (this.dateStepX.indexOf("days") != -1) {
                             this.context.fillStyle = "#DDD";
@@ -181,7 +183,7 @@ Graph.prototype = (function () {
                                 this.context.fillStyle = "#000";
                                 var previousMonth = new Date(dateToday);
                                 previousMonth.setDate(dateToday.getDate() - 1);
-                                this.context.fillText(previousMonth.toLocaleDateString(language, { month: "long" }), this._xCenter
+                                this.context.fillText(previousMonth.toLocaleDateString(language, { month: monthLabelSize }), this._xCenter
                                     + (daysFromMinToToday * this._unitX) - ((daysToLastMonth / 2) * this._unitX), this._yCenter + 12);
                                 daysToLastMonth = -1;
                             }
@@ -206,7 +208,7 @@ Graph.prototype = (function () {
                         this.context.fillStyle = "#000";
                         var previousMonth = new Date(dateToday);
                         previousMonth.setDate(dateToday.getDate() - 1);
-                        this.context.fillText(previousMonth.toLocaleDateString(language, { month: "long" }),
+                        this.context.fillText(previousMonth.toLocaleDateString(language, { month: monthLabelSize }),
                             this._xCenter + (daysFromMinToToday * this._unitX) - ((daysToLastMonth / 2) * this._unitX), this._yCenter + 12);
                     }
 
@@ -239,6 +241,8 @@ Graph.prototype = (function () {
                 if (this.isDateY) {
                     var daysToLastMonth = 0, daysToLastYear = 0, daysFromMinToToday = 0;
                     var fechaIni = new Date(this.minY * 86400000), fechaFin = new Date(this.maxY * 86400000);
+                    var monthLabelSize = (this.dateStepY.indexOf("narrow") != -1) ? "narrow" : (this.dateStepY.indexOf("short") != -1)
+                        ? "short" : "long";
                     this.context.textBaseline = "middle";
                     this.context.textAlign = "right";
                     for (var dateToday = new Date(fechaIni) ; dateToday <= fechaFin; dateToday.setDate(dateToday.getDate() + 1)) {
@@ -269,8 +273,9 @@ Graph.prototype = (function () {
                                 this.context.fillStyle = "#000";
                                 var previousMonth = new Date(dateToday);
                                 previousMonth.setDate(dateToday.getDate() - 1);
-                                this.context.fillText(previousMonth.toLocaleDateString(language, { month: "long" }), this._xCenter - 12,
-                                    this._yCenter - (daysFromMinToToday * this._unitY) + ((daysToLastMonth / 2) * this._unitY));
+                                this.context.fillText(previousMonth.toLocaleDateString(language, { month: monthLabelSize }), 
+                                    this._xCenter - 12, this._yCenter - (daysFromMinToToday * this._unitY) + ((daysToLastMonth / 2) 
+                                    * this._unitY));
                                 daysToLastMonth = -1;
                             }
                         }
@@ -294,7 +299,7 @@ Graph.prototype = (function () {
                         this.context.fillStyle = "#000";
                         var previousMonth = new Date(dateToday);
                         previousMonth.setDate(dateToday.getDate() - 1);
-                        this.context.fillText(previousMonth.toLocaleDateString(language, { month: "long" }), this._xCenter - 12,
+                        this.context.fillText(previousMonth.toLocaleDateString(language, { month: monthLabelSize }), this._xCenter - 12,
                             this._yCenter - (daysFromMinToToday * this._unitY) + ((daysToLastMonth / 2) * this._unitY));
                     }
 
