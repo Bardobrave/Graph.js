@@ -426,6 +426,13 @@ Specific features:
 
 #Sector Graphs
 
+Specific features
+<ul>
+	<li>Sector graphs are only able to represent one data collection at a time</li>
+	<li>Information can be shown as a percentage or as a total value</li>
+	<li>Graphs can be drawn as pie charts or as ring charts</li>
+</ul>
+
 <table id="SectorGraph_options">
 
 	<thead>
