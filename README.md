@@ -250,7 +250,6 @@ Graphs will fit by default to container's width and resize with the window autom
 <table id="LinearGraph_options">
 	<thead>
 		<tr>
-			<tr>
 			<th>Option</th>
 			<th>Default</th>
 			<th>Type</th>
@@ -318,7 +317,6 @@ Graphs will fit by default to container's width and resize with the window autom
 <table id="BarGraph_options">
 	<thead>
 		<tr>
-			<tr>
 			<th>Option</th>
 			<th>Default</th>
 			<th>Type</th>
@@ -405,7 +403,6 @@ Graphs will fit by default to container's width and resize with the window autom
 
 	<thead>
 		<tr>
-			<tr>
 			<th>Option</th>
 			<th>Default</th>
 			<th>Type</th>
@@ -474,7 +471,6 @@ Graphs will fit by default to container's width and resize with the window autom
 <table id="GanttGraph_options">
 	<thead>
 		<tr>
-			<tr>
 			<th>Option</th>
 			<th>Default</th>
 			<th>Type</th>
