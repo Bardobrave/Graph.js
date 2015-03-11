@@ -58,6 +58,10 @@ SectorGraph.prototype.draw = function (object) {
 
         //Borrado del canvas, ya que puede que no sea la primera vez que se dibuja la gráfica
         this.context.clearRect(0, 0, this.canvasObj.width, this.canvasObj.height);
+        
+        //Indicación de que no hace falta calcular límites ni rangos de ejes
+        this._dontExtendAxisX = true; 
+        this._dontExtendAxisY = true;
 
         //Si se pasa un diccionario de datos, éste se carga. Si no, en caso de que el diccionario de datos esté vacío se devuelve error
         if (object.hasOwnProperty("data"))
