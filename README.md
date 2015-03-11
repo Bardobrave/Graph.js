@@ -35,6 +35,12 @@ Graphs will fit by default to container's width and resize with the window autom
 	
 	<tbody>
 		<tr>
+			<td>colors</td>
+			<td>null</td>
+			<td>Array</td>
+			<td>A String Array with RGB color definitions ("#000", "#FEBD5A", "#d3450E", etc...)</td>
+		</tr>
+		<tr>
 			<td>data</td>
 			<td>null</td>
 			<td>Object</td>
@@ -42,22 +48,57 @@ Graphs will fit by default to container's width and resize with the window autom
 				on each type</td>
 		</tr>
 		<tr>
-			<td>title</td>
-			<td>null</td>
+			<td>dateStepX</td>
+			<td>"days"</td>
 			<td>String</td>
-			<td>A title to show on top of Graph. If Graph hasn't enough paddingHeight defined to fit the title this space will be added</td>
+			<td>When combined with isDateX true and data date information, this parameter is used to draw stepping marks on the X axis. Graph will
+			seek on dateStepX for the strings "days" "weeks" "months" and "years", adding to the axis the corresponding marks to each possible stepping
+			according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between
+			stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
+			Days and weekdays are print on Graph's top, while months and years are printed on Graph's bottom</td>
 		</tr>
 		<tr>
-			<td>legend</td>
-			<td>null</td>
-			<td>Array</td>
-			<td>A String Array who contains text for each legend element. If legend has a different number of elements than data, this option is ignored</td>
+			<td>dateStepY</td>
+			<td>"days"</td>
+			<td>String</td>
+			<td>When combined with isDateY true and data date information, this parameter is used to draw stepping marks on the Y axis. Graph will
+			seek on dateStepY for the strings "days" "weeks" "months" and "years", adding to the axis the corresponding marks to each possible stepping
+			according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between
+			stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
+			Days and weekdays are print on Graph's right side, while months and years are printed on Graph's left side</td>
 		</tr>
 		<tr>
-			<td>colors</td>
-			<td>null</td>
-			<td>Array</td>
-			<td>A String Array with RGB color definitions ("#000", "#FEBD5A", "#d3450E", etc...)</td>
+			<td>disableEvents</td>
+			<td>false</td>
+			<td>boolean</td>
+			<td>Boolean flag. When it's true, mouse move and click events on Graph's canvas are not set. If you don't have interest in event driven
+			behaviour for Graph you should active this flag, as a lot of overhead is avoided by doing so.</td>
+		</tr>
+		<tr>
+			<td>fontFamily</td>
+			<td>"Helvetica"</td>
+			<td>String</td>
+			<td>String containing the font family to apply to text on Graph. It can hold different space separated values and complete family 
+			references like "serif" or "sans-serif".</td>
+		</tr>
+		<tr>
+			<td>fontSize</td>
+			<td>"11px"</td>
+			<td>String</td>
+			<td>A string defining the font size to apply to text on Graph. It accept values with and without units.</td>
+		</tr>
+		<tr>
+			<td>fontStyle</td>
+			<td>"bold"</td>
+			<td>String</td>
+			<td>String param to define the style to apply to text on Graph. Possible values are those accepted on CSS "bold", "italic", "underline", 
+			etc...</td>
+		</tr>
+		<tr>
+			<td>fontVar</td>
+			<td>empty string</td>
+			<td>String</td>
+			<td>String param to define font variant to apply to text on Graph. Possible values are those accepted on CSS for the attribute font-variant</td>
 		</tr>
 		<tr>
 			<td>isDateX</td>
@@ -70,6 +111,26 @@ Graphs will fit by default to container's width and resize with the window autom
 			<td>false</td>
 			<td>boolean</td>
 			<td>If it's true Graph will try to parse Y axis data values as date values</td>
+		</tr>
+		<tr>
+			<td>labelsX</td>
+			<td>null</td>
+			<td>Array</td>
+			<td>Array of strings with the labels that will be print on the X axis of Graph. If it's not null the marks derived from unitStepX are
+			replaced by this labels. Labels spread proportionally all over the axis.</td>
+		</tr>
+		<tr>
+			<td>labelsY</td>
+			<td>null</td>
+			<td>Array</td>
+			<td>Array of strings with the labels that will be print on the Y axis of Graph. If it's not null the marks derived from unitStepY are
+			replaced by this labels. Labels spread proportionally all over the axis.</td>
+		</tr>
+		<tr>
+			<td>legend</td>
+			<td>null</td>
+			<td>Array</td>
+			<td>A String Array who contains text for each legend element. If legend has a different number of elements than data, this option is ignored</td>
 		</tr>
 		<tr>
 			<td>maxX</td>
@@ -104,56 +165,12 @@ Graphs will fit by default to container's width and resize with the window autom
 			represented on Graph</td>
 		</tr>
 		<tr>
-			<td>unitStepX</td>
-			<td>Depend on data</td>
-			<td>Number</td>
-			<td>A number which represent the amount of X axis units that will separate axis marks. If the axis range isn't divisible by the passed
-			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
-			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a X axis from 0 to 10 and we define unitStepX: 3,
-			Graph will use a unitStepX of 2 instead, drawing marks at 2, 4, 6 and 8 values.</td>
-		</tr>
-		<tr>
-			<td>unitStepY</td>
-			<td>Depend on data</td>
-			<td>Number</td>
-			<td>A number which represent the amount of Y axis units that will separate axis marks. If the axis range isn't divisible by the passed
-			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
-			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a Y axis from 0 to 10 and we define unitStepY: 3,
-			Graph will use a unitStepY of 2 instead, drawing marks at 2, 4, 6, and 8 values.</td>
-		</tr>
-		<tr>
-			<td>paddingWidth</td>
-			<td>100</td>
-			<td>Number</td>
-			<td>Number of pixels that will be used as horizontal padding on each side of the Graph.</td>
-		</tr>
-		<tr>
-			<td>paddingHeight</td>
-			<td>50</td>
-			<td>Number</td>
-			<td>Number of pixels that will be used as vertical padding on top and bottom of the Graph. It can be modified if Graph has title 
-			and/or legend to fit them.</td>
-		</tr>
-		<tr>
-			<td>labelsX</td>
+			<td>onClick</td>
 			<td>null</td>
-			<td>Array</td>
-			<td>Array of strings with the labels that will be print on the X axis of Graph. If it's not null the marks derived from unitStepX are
-			replaced by this labels. Labels spread proportionally all over the axis.</td>
-		</tr>
-		<tr>
-			<td>labelsY</td>
-			<td>null</td>
-			<td>Array</td>
-			<td>Array of strings with the labels that will be print on the Y axis of Graph. If it's not null the marks derived from unitStepY are
-			replaced by this labels. Labels spread proportionally all over the axis.</td>
-		</tr>
-		<tr>
-			<td>disableEvents</td>
-			<td>false</td>
-			<td>boolean</td>
-			<td>Boolean flag. When it's true, mouse move and click events on Graph's canvas are not set. If you don't have interest in event driven
-			behaviour for Graph you should active this flag, as a lot of overhead is avoided by doing so.</td>
+			<td>callback</td>
+			<td>Function callback to the specific behaviour wanted for click event on Graph elements. This function is fired when the mouse is clicked
+			over an element of Graph, API passes two params to the callback: element which is the data object where the click has been made, and event,
+			which is the event object being captured by the browser.</td>
 		</tr>
 		<tr>
 			<td>onMouseHover</td>
@@ -172,38 +189,17 @@ Graphs will fit by default to container's width and resize with the window autom
 			and event, which is the event object being captured by the browser.</td>
 		</tr>
 		<tr>
-			<td>onClick</td>
-			<td>null</td>
-			<td>callback</td>
-			<td>Function callback to the specific behaviour wanted for click event on Graph elements. This function is fired when the mouse is clicked
-			over an element of Graph, API passes two params to the callback: element which is the data object where the click has been made, and event,
-			which is the event object being captured by the browser.</td>
+			<td>paddingHeight</td>
+			<td>50</td>
+			<td>Number</td>
+			<td>Number of pixels that will be used as vertical padding on top and bottom of the Graph. It can be modified if Graph has title 
+			and/or legend to fit them.</td>
 		</tr>
 		<tr>
-			<td>fontStyle</td>
-			<td>"bold"</td>
-			<td>String</td>
-			<td>String param to define the style to apply to text on Graph. Possible values are those accepted on CSS "bold", "italic", "underline", 
-			etc...</td>
-		</tr>
-		<tr>
-			<td>fontVar</td>
-			<td>empty string</td>
-			<td>String</td>
-			<td>String param to define font variant to apply to text on Graph. Possible values are those accepted on CSS for the attribute font-variant</td>
-		</tr>
-		<tr>
-			<td>fontSize</td>
-			<td>"11px"</td>
-			<td>String</td>
-			<td>A string defining the font size to apply to text on Graph. It accept values with and without units.</td>
-		</tr>
-		<tr>
-			<td>fontFamily</td>
-			<td>"Helvetica"</td>
-			<td>String</td>
-			<td>String containing the font family to apply to text on Graph. It can hold different space separated values and complete family 
-			references like "serif" or "sans-serif".</td>
+			<td>paddingWidth</td>
+			<td>100</td>
+			<td>Number</td>
+			<td>Number of pixels that will be used as horizontal padding on each side of the Graph.</td>
 		</tr>
 		<tr>
 			<td>resizable</td>
@@ -216,24 +212,28 @@ Graphs will fit by default to container's width and resize with the window autom
 			given on the previous drawing</td>
 		</tr>
 		<tr>
-			<td>dateStepX</td>
-			<td>"days"</td>
+			<td>title</td>
+			<td>null</td>
 			<td>String</td>
-			<td>When combined with isDateX true and data date information, this parameter is used to draw stepping marks on the X axis. Graph will
-			seek on dateStepX for the strings "days" "weeks" "months" and "years", adding to the axis the corresponding marks to each possible stepping
-			according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between
-			stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
-			Days and weekdays are print on Graph's top, while months and years are printed on Graph's bottom</td>
+			<td>A title to show on top of Graph. If Graph hasn't enough paddingHeight defined to fit the title this space will be added</td>
 		</tr>
 		<tr>
-			<td>dateStepY</td>
-			<td>"days"</td>
-			<td>String</td>
-			<td>When combined with isDateY true and data date information, this parameter is used to draw stepping marks on the Y axis. Graph will
-			seek on dateStepY for the strings "days" "weeks" "months" and "years", adding to the axis the corresponding marks to each possible stepping
-			according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between
-			stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
-			Days and weekdays are print on Graph's right side, while months and years are printed on Graph's left side</td>
+			<td>unitStepX</td>
+			<td>Depend on data</td>
+			<td>Number</td>
+			<td>A number which represent the amount of X axis units that will separate axis marks. If the axis range isn't divisible by the passed
+			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
+			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a X axis from 0 to 10 and we define unitStepX: 3,
+			Graph will use a unitStepX of 2 instead, drawing marks at 2, 4, 6 and 8 values.</td>
+		</tr>
+		<tr>
+			<td>unitStepY</td>
+			<td>Depend on data</td>
+			<td>Number</td>
+			<td>A number which represent the amount of Y axis units that will separate axis marks. If the axis range isn't divisible by the passed
+			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
+			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a Y axis from 0 to 10 and we define unitStepY: 3,
+			Graph will use a unitStepY of 2 instead, drawing marks at 2, 4, 6, and 8 values.</td>
 		</tr>
 		<tr>
 			<td>weeksStartsOnSundays</td>
@@ -282,12 +282,6 @@ Graphs will fit by default to container's width and resize with the window autom
 			</td>
 		</tr>
 		<tr>
-			<td>lineWidth</td>
-			<td>1</td>
-			<td>Number</td>
-			<td>A number defining the width of the lines between each pair of LinearGraph point values</td>
-		</tr>
-		<tr>
 			<td>drawPoints</td>
 			<td>true</td>
 			<td>boolean</td>
@@ -297,18 +291,24 @@ Graphs will fit by default to container's width and resize with the window autom
 			missleading</td>
 		</tr>
 		<tr>
-			<td>pointRadius</td>
-			<td>3</td>
-			<td>Numeric</td>
-			<td>Number of pixels of LinearGraph's point radius. If set to 0 points won't be visible, however, to achieve this is better to just
-			set drawPoints to false, saving the overhead of drawing 0 radius points on each recorded data point.</td>
-		</tr>
-		<tr>
 			<td>fillPoints</td>
 			<td>false</td>
 			<td>boolean</td>
 			<td>If set to true, drawn points will be painted on the same solid color that the line representing it's data collection. If set to 
 			false, points will be hollow (center white, border of the same color of line).</td>
+		</tr>
+		<tr>
+			<td>lineWidth</td>
+			<td>1</td>
+			<td>Number</td>
+			<td>A number defining the width of the lines between each pair of LinearGraph point values</td>
+		</tr>
+		<tr>
+			<td>pointRadius</td>
+			<td>3</td>
+			<td>Numeric</td>
+			<td>Number of pixels of LinearGraph's point radius. If set to 0 points won't be visible, however, to achieve this is better to just
+			set drawPoints to false, saving the overhead of drawing 0 radius points on each recorded data point.</td>
 		</tr>
 	</tbody>
 </table>
@@ -328,6 +328,22 @@ Graphs will fit by default to container's width and resize with the window autom
 	
 	<tbody>
 		<tr>
+			<td>barWidth</td>
+			<td>calculated</td>
+			<td>Numeric</td>
+			<td>Numeric value that defines the number of pixels which will be used to draw the bars. This is the fixed size of the vars, as it's length
+			depends on data values. When a value too big, or not value at all, is passed to this parameter, BarGraph calculates the optimum width
+			depending on the layout, the number of elements to show and the BarGraph grouping status.
+			When resizing of the screen drives to a barWidth value that doesn't fit on the new resolution, this is recalculated and applied on the new
+			drawing.</td>
+		</tr>
+		<tr>
+			<td>borderColor</td>
+			<td>"#000"</td>
+			<td>String</td>
+			<td>String representing a RGB color pattern "#000", "#18B5EF", "#36fE4a", ... which will be used to draw bar borders</td>
+		</tr>
+		<tr>
 			<td>data</td>
 			<td>null</td>
 			<td>object</td>
@@ -346,18 +362,6 @@ Graphs will fit by default to container's width and resize with the window autom
 				Once data is parsed, the resulting standard structure will be like this: [ [ { x: 1, y: 7, ... }, { x: 2, y: 12, ... }, ... ], 
 				[ { x: 27, y: 995, ...}, { x: 29, y: -2150 }, ...] ]
 			</td>
-		</tr>
-		<tr>
-			<td>lineWidth</td>
-			<td>0</td>
-			<td>Number</td>
-			<td>Numeric value representing the border with of the bars on the BarGraph. If set to 0, bars will be drawn without border</td>
-		</tr>
-		<tr>
-			<td>borderColor</td>
-			<td>"#000"</td>
-			<td>String</td>
-			<td>String representing a RGB color pattern "#000", "#18B5EF", "#36fE4a", ... which will be used to draw bar borders</td>
 		</tr>
 		<tr>
 			<td>grouped</td>
@@ -387,14 +391,10 @@ Graphs will fit by default to container's width and resize with the window autom
 			</td>
 		</tr>
 		<tr>
-			<td>barWidth</td>
-			<td>calculated</td>
-			<td>Numeric</td>
-			<td>Numeric value that defines the number of pixels which will be used to draw the bars. This is the fixed size of the vars, as it's length
-			depends on data values. When a value too big, or not value at all, is passed to this parameter, BarGraph calculates the optimum width
-			depending on the layout, the number of elements to show and the BarGraph grouping status.
-			When resizing of the screen drives to a barWidth value that doesn't fit on the new resolution, this is recalculated and applied on the new
-			drawing.</td>
+			<td>lineWidth</td>
+			<td>0</td>
+			<td>Number</td>
+			<td>Numeric value representing the border with of the bars on the BarGraph. If set to 0, bars will be drawn without border</td>
 		</tr>
 	</tbody>
 </table>
@@ -415,6 +415,13 @@ Graphs will fit by default to container's width and resize with the window autom
 	
 	<tbody>
 		<tr>
+			<td>borderColor</td>
+			<td>"#fff"</td>
+			<td>String</td>
+			<td>A String containing a RGB color definition ("#fff", "#21ED1A", "#4aeDF2", ...) which will be used to draw the border of the sectors on
+			SectorGraph</td>
+		</tr>
+		<tr>
 			<td>data</td>
 			<td>null</td>
 			<td>object</td>
@@ -423,12 +430,10 @@ Graphs will fit by default to container's width and resize with the window autom
 			</td>
 		</tr>
 		<tr>
-			<td>radius</td>
-			<td>calculated</td>
+			<td>lineWidth</td>
+			<td>1</td>
 			<td>Numeric</td>
-			<td>The number of pixels for the radius of the SectorGraph. If a value too long or not value at all is passed to the parameter, it's 
-			automatically calculated to fit the dimensions of the SectorGraph canvas.
-			</td>
+			<td>The border with in pixels for each sector on the SectorGraph</td>
 		</tr>
 		<tr>
 			<td>percentage</td>
@@ -440,23 +445,12 @@ Graphs will fit by default to container's width and resize with the window autom
 			</td>
 		</tr>
 		<tr>
-			<td>borderColor</td>
-			<td>"#fff"</td>
-			<td>String</td>
-			<td>A String containing a RGB color definition ("#fff", "#21ED1A", "#4aeDF2", ...) which will be used to draw the border of the sectors on
-			SectorGraph</td>
-		</tr>
-		<tr>
-			<td>lineWidth</td>
-			<td>1</td>
+			<td>radius</td>
+			<td>calculated</td>
 			<td>Numeric</td>
-			<td>The border with in pixels for each sector on the SectorGraph</td>
-		</tr>
-		<tr>
-			<td>showLabels</td>
-			<td>true</td>
-			<td>boolean</td>
-			<td>When this flag is set to false, labels outside of sectors are not drawn.</td>
+			<td>The number of pixels for the radius of the SectorGraph. If a value too long or not value at all is passed to the parameter, it's 
+			automatically calculated to fit the dimensions of the SectorGraph canvas.
+			</td>
 		</tr>
 		<tr>
 			<td>ringWidth</td>
@@ -465,6 +459,12 @@ Graphs will fit by default to container's width and resize with the window autom
 			<td>If a value greater than 0 is passed, SectorGraph will draw a ring graph instead of a sector one. This parameter will represent the 
 			width of the ring. Also, the width is used to calculate a ratio between the outside radius and the inner one, if the window resizes,
 			both radius will resize accordingly, maintaining the aspect ratio of the ring although it's actual width changes.</td>
+		</tr>
+		<tr>
+			<td>showLabels</td>
+			<td>true</td>
+			<td>boolean</td>
+			<td>When this flag is set to false, labels outside of sectors are not drawn.</td>
 		</tr>
 	</tbody>
 </table>
@@ -484,6 +484,21 @@ Graphs will fit by default to container's width and resize with the window autom
 	
 	<tbody>
 		<tr>
+			<td>barWidth</td>
+			<td>calculated</td>
+			<td>Number</td>
+			<td>The width in pixels of the GanttGraph bars. If a value too long or not value at all is passed, GanttGraph will calculate the best
+			with possible to draw the GanttGraph according to the number of data collections and the length of the element axis.
+			</td>
+		</tr>
+		<tr>
+			<td>borderColor</td>
+			<td>"#000"</td>
+			<td>String</td>
+			<td>A String containing a RGB color definition ("#000", "#FED543", "#dBa31F", ...) which determines the color to be used for the border
+			of GanttGraph bars</td>
+		</tr>
+		<tr>
 			<td>data</td>
 			<td>null</td>
 			<td>object</td>
@@ -500,21 +515,6 @@ Graphs will fit by default to container's width and resize with the window autom
 				Once data is parsed, the resulting standard structure will be like this: [ [ { y: 0, start: 22, end: 28 ... }, 
 				{ y: 0, start: 34, end: 42 ... }, ... ], [ { y: 1, start: 35, end: 39 ...}, { y: 1, start: 42, end: 45 }, ...] ]
 			</td>
-		</tr>
-		<tr>
-			<td>barWidth</td>
-			<td>calculated</td>
-			<td>Number</td>
-			<td>The width in pixels of the GanttGraph bars. If a value too long or not value at all is passed, GanttGraph will calculate the best
-			with possible to draw the GanttGraph according to the number of data collections and the length of the element axis.
-			</td>
-		</tr>
-		<tr>
-			<td>borderColor</td>
-			<td>"#000"</td>
-			<td>String</td>
-			<td>A String containing a RGB color definition ("#000", "#FED543", "#dBa31F", ...) which determines the color to be used for the border
-			of GanttGraph bars</td>
 		</tr>
 		<tr>
 			<td>lineWidth</td>
