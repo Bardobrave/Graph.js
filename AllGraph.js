@@ -1175,7 +1175,7 @@ SectorGraph.prototype.draw = function (object) {
             var legendX = this._xCenter + this.radius + ((this.canvasObj.width - this.paddingWidth - this._xCenter - this.radius) / 2);
             var legendY = this.canvasObj.height - this.paddingHeight;
             for (var legendElement in this.legend) {
-                this.context.fillStyle = this.colors[legendElement];
+                this.context.fillStyle = this.colors[legendElement % this.colors.length];
                 this.context.fillRect(legendX, legendY, this._legendDotSize, this._legendDotSize);
                 this.context.fillStyle = "#000";
                 this.context.fillText(this.legend[legendElement], legendX + (this._legendDotSize * 2), legendY);
