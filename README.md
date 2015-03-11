@@ -9,7 +9,15 @@ This is yet at an early stage, it's fully functional but it lacks proper testing
 
 I'll try to maintain code extensely commented (also, I'll try to comment it in english). When I achieve a final release I'll also provide minified files.
 
-Graph.js uses HTML5 canvas to draw, so you'll need compatible browsers to use it. It's been tested so far on last versions of Chrome and Firefox.
+#Features
+
+<ul>
+	<li>Library independent, just plain javaScript</li>
+	<li>Graph.js uses HTML5 canvas to draw, so you'll need compatible browsers to use it. It's been tested so far on last versions of Chrome and Firefox.</li>
+	<li>Graphs will automatically fit container's width</li>
+	<li>Graphs resize automatically with browser's window</li>
+	<li>Graphs capture events for mouse move and click, and accept custom event handlers. Event handling can also be disabled</li>
+</ul>
 
 # How to use it
 
@@ -21,6 +29,7 @@ Once you have included the files you are ready to add Graphs to your page. Just 
 
 Graphs will fit by default to container's width and resize with the window automatically (however you can change those default behaviours).
 
+If you want to change the styles of default mouse move event tooltips you can do it within a css class named "graphTooltip".
 
 #Global Graph options
 <table id="Graph_options">
@@ -249,7 +258,9 @@ Graphs will fit by default to container's width and resize with the window autom
 #Linear graphs
 
 Specific features:
--Linear graphs can accept functions as data, building graphs with the results of applying those functions on a data range
+<ul>
+	<li>Linear graphs can accept functions as data, building graphs with the results of applying those functions on a data range</li>
+</ul>
 
 <a href="http://jsfiddle.net/bardobrave/Lwqzknba/" target="_blank">Fiddle with examples</a>
 
