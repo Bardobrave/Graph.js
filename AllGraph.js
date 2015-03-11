@@ -1292,8 +1292,8 @@ SectorGraph.prototype.draw = function (object) {
                     && bisectrizAngle <= 5 * Math.PI / 4) || (bisectrizAngle >= 7 * Math.PI / 4)) ? "middle" : (bisectrizAngle <= Math.PI) ? "top"
                     : "bottom";
                 this.context.fillStyle = "#000";
-                this.context.fillText((this.labelsX.length > sector) ? this.labelsX[sector] : (this.percentage) ? porcentaje + " %"
-                    : this.data[sector], this._xCenter0 + (Math.cos(bisectrizAngle) * (this.radius + 5)), this._yCenter0
+                this.context.fillText((this.labelsX != null && this.labelsX.length > sector) ? this.labelsX[sector] : (this.percentage) 
+                    ? porcentaje + " %" : this.data[sector], this._xCenter0 + (Math.cos(bisectrizAngle) * (this.radius + 5)), this._yCenter0
                     + (Math.sin(bisectrizAngle) * (this.radius + 5)));
             }
         }
