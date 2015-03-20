@@ -71,20 +71,16 @@ If you want to change the styles of default mouse move event tooltips you can do
 			<td>"days"</td>
 			<td>String</td>
 			<td>When combined with isDateX true and data date information, this parameter is used to draw stepping marks on the X axis. Graph will
-			seek on dateStepX for the strings "days" "weeks" "months" and "years", adding to the axis the corresponding marks to each possible stepping
-			according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between
-			stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
-			Days and weekdays are print on Graph's top, while months and years are printed on Graph's bottom</td>
+			seek on dateStepX for the strings "seconds", "minutes", "hours", "days", "weeks", "months" and "years", adding to the axis the corresponding marks to each possible stepping according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between 		stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
+Seconds, minutes, days and weekdays are print on Graph's top, while hours, months and years are printed on Graph's bottom. Also "narrow", "short" and "long" prefixes can be added to the different date types to identify which localized format should be used to representate them</td>
 		</tr>
 		<tr>
 			<td>dateStepY</td>
 			<td>"days"</td>
 			<td>String</td>
 			<td>When combined with isDateY true and data date information, this parameter is used to draw stepping marks on the Y axis. Graph will
-			seek on dateStepY for the strings "days" "weeks" "months" and "years", adding to the axis the corresponding marks to each possible stepping
-			according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between
-			stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
-			Days and weekdays are print on Graph's right side, while months and years are printed on Graph's left side</td>
+			seek on dateStepY for the strings "seconds", "minutes", "hours", "days", "weeks", "months" and "years", adding to the axis the corresponding marks to each possible stepping according to passed data. Although values like "daysweeksyears" are valid, it's strongly recommended to use any kind of separator between 		stepping values "days|years" "months#weeks" "years$months$weeks$days", etc...
+Seconds, minutes, days and weekdays are print on Graph's top, while hours, months and years are printed on Graph's bottom. Also "narrow", "short" and "long" prefixes can be added to the different date types to identify which localized format should be used to representate them</td>
 		</tr>
 		<tr>
 			<td>disableEvents</td>
@@ -235,6 +231,18 @@ If you want to change the styles of default mouse move event tooltips you can do
 			<td>null</td>
 			<td>String</td>
 			<td>A title to show on top of Graph. If Graph hasn't enough paddingHeight defined to fit the title this space will be added</td>
+		</tr>
+		<tr>
+			<td>unitDateX</td>
+			<td>"days"</td>
+			<td>string</td>
+			<td>A string that determines, when the X axis representates dates, which will be the unit used to measure data.</td>
+		</tr>
+		<tr>
+			<td>unitDateY</td>
+			<td>"days"</td>
+			<td>string</td>
+			<td>A string that determines, when the Y axis representates dates, which will be the unit used to measure data.</td>
 		</tr>
 		<tr>
 			<td>unitStepX</td>
