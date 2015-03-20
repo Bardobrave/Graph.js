@@ -1,11 +1,11 @@
 # Graph.js
-Simple yet powerful js API for graphs drawing
+"Simple" yet powerful js API for graphs drawing
 
 The idea behind this API is to create an easy to use tool for web developers to create graphs on their projects.
 The objective is to allow users to create a functional graph just creating an object and passing it data.
 I want also allow as many options as I can, so users can fine tune their graphs to the maximum detail possible while maintaining ease of use.
 
-This is yet at an early stage, it's fully functional but it lacks proper testing, cross-browser functionality and a good code cleanup. Feel free to use and play with it, also all feedback will be appreciated, however, keep in mind a lot of work is needed before this becomes a "release".
+This is yet at an early stage, it's fully functional but it lacks proper testing and a good code cleanup. Feel free to use and play with it, also all feedback will be appreciated, however, keep in mind a lot of work is needed before this becomes a "release".
 
 I'll try to maintain code extensely commented (also, I'll try to comment it in english). When I achieve a final release I'll also provide minified files.
 
@@ -24,10 +24,9 @@ I'll try to maintain code extensely commented (also, I'll try to comment it in e
 Here is a brief list of different things that I'd like to add to the API before going on "production"
 
 <ul>
-	<li>Resizing based on a fixed resolution. So if you render for the first time a Graph on a resolution different from the one it was designed for, it can already resize to a proportional state</li>
-	<li>Cross-browser compatibility. At least the system should be able to detect if current browser cannot render Graphs properly and show a message</li>
 	<li>Titles and legends should position themselves and reserve space depending on fontSize and available space</li>
 	<li>System should be able to generate clean error messages when invalid data structures are passed. Actually API already does it, however more testing is needed to ensure enough stability on this matter.</li>
+	<li>Some minor fixes and improvements derived from allowing more date data types.</li>
 </ul>
 
 # How to use it
@@ -575,3 +574,7 @@ Specific features:
 		</tr>
 	</tbody>
 </table>
+
+#Working with dates
+
+I've recently improved dates behaviour on the graph. Making it proportionally harder to use. I'll try to sketch here a quick tutorial for creating Graphs with dates on any of their axis.
