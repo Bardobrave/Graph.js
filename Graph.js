@@ -391,23 +391,25 @@ if (GraphBrowserCompatibility) {
                     return candidate;
                 }
 
-                //Método interno que obiene el siguiente entero mayor en base a un orden. Se usa para obtener los valores límite a partir de los 
-                // valores contenidos en el array de datos cuando el usuario no determina valores límite.
+                //Método interno que obiene el siguiente entero mayor en base a un orden. Se usa para obtener los valores límite a 
+                //partir de los valores contenidos en el array de datos cuando el usuario no determina valores límite.
                 function getNextBiggerIntInOrder(i) {
                     var ponderValue = (i.toString().length == 1) ? 10 : (i.toString().length - 1) * 10;
                     return (i > 0) ? Math.ceil(i / ponderValue) * ponderValue : Math.floor(i / ponderValue) * ponderValue;
                 }
 
-                //Método interno que recorre hacia adelante o hacia atrás los días desde una fecha dada hasta encontrar el inicio o fin del mes.
-                //Espera un número de días desde la fecha cero hasta la dada y un booleano que indica si se busca hacia adelante o hacia atrás.
+                //Método interno que recorre hacia adelante o hacia atrás los días desde una fecha dada hasta encontrar el inicio o 
+                //fin del mes. Espera un número de días desde la fecha cero hasta la dada y un booleano que indica si se busca hacia 
+                //adelante o hacia atrás.
                 function getNextOrPreviousMonth(limitDay, next) {
                     var dateLimit = new Date(limitDay * 86400000);
                     var increment = (next) ? 1 : -1;
                     while (dateLimit.getDate() != 1)
                         dateLimit.setDate(dateLimit.getDate() + increment);
 
+                    //En caso de buscar el inicio del próximo mes, queremos devolver el día anterior.
                     if (next)
-                        dateLimit.setDate(dateLimit.getDate() - 1); //En caso de buscar el inicio del próximo mes, queremos devolver el día anterior.
+                        dateLimit.setDate(dateLimit.getDate() - 1); 
 
                     return Date.parse(dateLimit.toString() + " UTC") / 86400000;
                 }
@@ -544,6 +546,7 @@ if (GraphBrowserCompatibility) {
                         return currentValue != minValue && (currentValue == maxValue || myDate.getUTCMinutes() != myPreviousDate.getUTCMinutes());
                     },
                     parseDate: function (date) {
+                        date = date.substr(0, 16) + ":00"; //Se eliminan los segundos.
                         return Date.parse(date + " UTC") / this.temporalUnits["minutes"].dateMultiplier;
                     },
                     loadParsedDate: function (date) {
@@ -568,6 +571,7 @@ if (GraphBrowserCompatibility) {
                         return currentValue != minValue && (currentValue == maxValue || myDate.getUTCHours() != myPreviousDate.getUTCHours());
                     },
                     parseDate: function (date) {
+                        date = date.substr(0, 13) + ":00"; //Se eliminan minutos y segundos
                         return Date.parse(date + " UTC") / this.temporalUnits["hours"].dateMultiplier;
                     },
                     loadParsedDate: function (date) {
@@ -592,6 +596,7 @@ if (GraphBrowserCompatibility) {
                         return currentValue != minValue && (currentValue == maxValue || myDate.getUTCDate() != myPreviousDate.getUTCDate());
                     },
                     parseDate: function (date) {
+                        date = date.substr(0, 10); //Eliminación de las horas
                         return Date.parse(date + " UTC") / this.temporalUnits["days"].dateMultiplier;
                     },
                     loadParsedDate: function (date) {
