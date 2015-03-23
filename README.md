@@ -236,13 +236,13 @@ Seconds, minutes, days and weekdays are print on Graph's top, while hours, month
 			<td>unitDateX</td>
 			<td>"days"</td>
 			<td>string</td>
-			<td>A string that determines, when the X axis representates dates, which will be the unit used to measure data.</td>
+			<td>A string that determines, when the X axis representates dates, which will be the unit used to measure data. It accept the following values: "seconds", "minutes", "hours", "days", "months" and "years".</td>
 		</tr>
 		<tr>
 			<td>unitDateY</td>
 			<td>"days"</td>
 			<td>string</td>
-			<td>A string that determines, when the Y axis representates dates, which will be the unit used to measure data.</td>
+			<td>A string that determines, when the Y axis representates dates, which will be the unit used to measure data. It accept the following values: "seconds", "minutes", "hours", "days", "months" and "years".</td>
 		</tr>
 		<tr>
 			<td>unitStepX</td>
@@ -585,4 +585,22 @@ Specific features:
 
 #Working with dates
 
-I've recently improved dates behaviour on the graph. Making it proportionally harder to use. I'll try to sketch here a quick tutorial for creating Graphs with dates on any of their axis.
+After last changes to the library, it's capable of represent date info on Graphs with more options. Sadly this has also augmented it's complexity of use. I'll try to depict here a brief tutorial about working with dates. I'll try also to put some examples.
+
+First things first. For using date info you'll need to get familiar with three parameters. I'll use on the examples x axis for dates (as it's the most usual), however, every of this parameters has it's Y counterpart:
+
+<ul>
+	<li>isDateX: This param simply states that x axis will contain date information</li>
+	<li>unitDateX: This is the param that states the temporal unit our Graph will be using</li>
+	<li>dateStepX: This param will describe where and how reticule marks should be drawn on the Graph</li>
+</ul>
+
+This way, when we want to represent temporal data on one of our axis, we need to do three things: make library aware of it through isDateX, set the temporal unit through unitDateX, and define our reticule through dateStepX.
+
+There are some considerations to keep acount of:
+
+<ul>
+	<li>At this moment, when we load temporal data into our Graph, we need to do it passing date as strings with the following format yyyy/mm/dd hh:mm:ss.</li>
+	<li>Dates will be treated internally as UTC</li>
+	<li>If we select any reticule mark of lesser magnitude than our temporal unit it will be ignored</li>
+</ul>
