@@ -136,10 +136,34 @@ if (GraphBrowserCompatibility) {
         //Definición del interfaz público del prototipo de la clase Graph
         return {
             constructor: Graph,
+            //Método que dibuja los ejes de coordenadas
+            drawAxis: function () {
+                this.context.textAlign = "center";
+                this.context.fillStyle = "#000";
+
+                if (this.labelsX == null && this.minX <= 0 && this.maxX >= 0) {
+                    this.context.fillRect(this._xCenter0, this._yCenter, 1, -this._graphY);
+                    if (this._xCenter0 == this._xCenter && this._yCenter0 == this._yCenter)
+                        this.context.fillText("0", this._xCenter0 - 5, this._yCenter0 + 12);
+                    else
+                        this.context.fillText("0", this._xCenter0, this._yCenter + 12);
+                } else
+                    this.context.fillRect(this._xCenter, this._yCenter, 1, -this._graphY);
+
+                if (this.labelsY == null && this.minY <= 0 && this.maxY >= 0) {
+                    this.context.fillRect(this._xCenter, this._yCenter0, this._graphX, 1);
+                    if (this._xCenter0 == this._xCenter && this._yCenter0 == this._yCenter)
+                        this.context.fillText("0", this._xCenter0 - 5, this._yCenter0 + 12);
+                    else
+                        this.context.fillText("0", this._xCenter - 12, this._yCenter0 + 5);
+                } else
+                    this.context.fillRect(this._xCenter, this._yCenter, this._graphX, 1);
+            },
             //Método público que dibuja una retícula en función de los datos cargados en el objeto Graph y los parámetros pasados en el objeto. 
             drawReticle: function () {
                 var xOffset = 0, yOffset = 0;
                 var language = window.navigator.userLanguage || window.navigator.language;
+                var markColors = ["#DDD", "#AAA", "#777", "#444", "#111"];
 
                 //Comienza el dibujo de la retícula
                 this.context.font = this._font;
@@ -175,6 +199,7 @@ if (GraphBrowserCompatibility) {
                             var cumulativeBottomUnits = 0; cumulativeTopUnits = 0;
                             var myDate = this.temporalUnits[this.unitDateX].loadParsedDate.call(this, currentValue);
                             var myPreviousDate = this.temporalUnits[this.unitDateX].loadParsedDate.call(this, currentValue - 1);
+                            var order = 0;
                             for (var unit in this.temporalUnits) {
                                 if (this.temporalUnits[unit].order >= this.temporalUnits[this.unitDateX].order && this.dateStepX.indexOf(unit)
                                     != -1) {
@@ -182,9 +207,10 @@ if (GraphBrowserCompatibility) {
                                         var cumulativeUnits = (this.temporalUnits[unit].position == "top") ? cumulativeBottomUnits
                                             : cumulativeTopUnits;
                                         //Se tienen que dibujar la marca y la etiqueta de la unidad
-                                        this.context.fillStyle = this.temporalUnits[unit].markColor;
-                                        this.context.fillRect(this._xCenter + ((currentValue - this.minX) * this._unitX), this._yCenter, 1,
-                                            -this._graphY);
+                                        this.context.fillStyle = markColors[(order % 5)];
+                                        this.context.fillRect(Math.round(this._xCenter + ((currentValue - this.minX) * this._unitX)),
+                                            this._yCenter, 1, -this._graphY);
+                                        this.context.fillStyle = "#333";
                                         this.temporalUnits[unit].label.call(this, currentValue, myDate, myPreviousDate, cumulativeUnits, "X",
                                             language);
                                     }
@@ -193,13 +219,14 @@ if (GraphBrowserCompatibility) {
                                         cumulativeBottomUnits += 10;
                                     else
                                         cumulativeTopUnits += 10;
+                                    order++;
                                 }
                             }
                         }
                     } else {
                         for (var x = this.minX; x <= this.maxX; x = x + this.unitStepX) {
                             this.context.fillStyle = "#DDD";
-                            this.context.fillRect(this._xCenter + xOffset, this._yCenter, 1, -this._graphY);
+                            this.context.fillRect(Math.round(this._xCenter + xOffset), this._yCenter, 1, -this._graphY);
                             if (x != 0) {
                                 this.context.fillStyle = "#000";
                                 this.context.fillText(x, this._xCenter + xOffset, this._yCenter + 12)
@@ -223,6 +250,7 @@ if (GraphBrowserCompatibility) {
                             var cumulativeBottomUnits = 0; cumulativeTopUnits = 0;
                             var myDate = this.temporalUnits[this.unitDateX].loadParsedDate.call(this, currentValue);
                             var myPreviousDate = this.temporalUnits[this.unitDateX].loadParsedDate.call(this, currentValue - 1);
+                            var order = 0;
                             for (var unit in this.temporalUnits) {
                                 if (this.temporalUnits[unit].order >= this.temporalUnits[this.unitDateX].order && this.dateStepY.indexOf(unit)
                                     != -1) {
@@ -230,9 +258,10 @@ if (GraphBrowserCompatibility) {
                                         var cumulativeUnits = (this.temporalUnits[unit].position == "top") ? cumulativeBottomUnits
                                             : cumulativeTopUnits;
                                         //Se tienen que dibujar la marca y la etiqueta de la unidad
-                                        this.context.fillStyle = this.temporalUnits[unit].markColor;
-                                        this.context.fillRect(this._xCenter, this._yCenter - ((currentValue - this.minY) * this._unitY),
+                                        this.context.fillStyle = markColors[(order % 5)];
+                                        this.context.fillRect(this._xCenter, Math.round(this._yCenter - ((currentValue - this.minY) * this._unitY)),
                                             this._graphX, 1);
+                                        this.context.fillStyle = "#333";
                                         this.temporalUnits[unit].label.call(this, currentValue, myDate, myPreviousDate, cumulativeUnits, "Y",
                                             language);
                                     }
@@ -241,13 +270,14 @@ if (GraphBrowserCompatibility) {
                                         cumulativeBottomUnits += 10;
                                     else
                                         cumulativeTopUnits += 10;
+                                    order++;
                                 }
                             }
                         }
                     } else {
                         for (var y = this.minY; y <= this.maxY; y = y + this.unitStepY) {
                             this.context.fillStyle = "#DDD";
-                            this.context.fillRect(this._xCenter, this._yCenter - yOffset, this._graphX, 1);
+                            this.context.fillRect(this._xCenter, Math.round(this._yCenter - yOffset), this._graphX, 1);
                             if (y != 0) {
                                 this.context.fillStyle = "#000";
                                 this.context.fillText(y, this._xCenter - 12, this._yCenter - yOffset + 5);
@@ -262,29 +292,6 @@ if (GraphBrowserCompatibility) {
                     for (var current in this.labelsY)
                         this.context.fillText(this.labelsY[current], this._xCenter - 12, this._yCenter - (yOffset * current) + 5 - (yOffset / 2));
                 }
-            },
-            //Método que dibuja los ejes de coordenadas
-            drawAxis: function () {
-                this.context.textAlign = "center";
-                this.context.fillStyle = "#000";
-
-                if (this.labelsX == null && this.minX <= 0 && this.maxX >= 0) {
-                    this.context.fillRect(this._xCenter0, this._yCenter, 1, -this._graphY);
-                    if (this._xCenter0 == this._xCenter && this._yCenter0 == this._yCenter)
-                        this.context.fillText("0", this._xCenter0 - 5, this._yCenter0 + 12);
-                    else
-                        this.context.fillText("0", this._xCenter0, this._yCenter + 12);
-                } else
-                    this.context.fillRect(this._xCenter, this._yCenter, 1, -this._graphY);
-
-                if (this.labelsY == null && this.minY <= 0 && this.maxY >= 0) {
-                    this.context.fillRect(this._xCenter, this._yCenter0, this._graphX, 1);
-                    if (this._xCenter0 == this._xCenter && this._yCenter0 == this._yCenter)
-                        this.context.fillText("0", this._xCenter0 - 5, this._yCenter0 + 12);
-                    else
-                        this.context.fillText("0", this._xCenter - 12, this._yCenter0 + 5);
-                } else
-                    this.context.fillRect(this._xCenter, this._yCenter, this._graphX, 1);
             },
             //Método público de la clase Graph que carga los manejadores de eventos para una gráfica
             loadEventHandlers: function (object) {
@@ -606,7 +613,6 @@ if (GraphBrowserCompatibility) {
                     label: function (currentValue, myDate, myPreviousDate, cumulativeUnits, axis, language) {
                         if (this.temporalUnits["days"].checkTempUnitChange(myDate, myPreviousDate, currentValue, this["max" + axis],
                             this["min" + axis])) {
-                            this.context.fillStyle = "#888";
                             var data = myPreviousDate.toLocaleDateString(language, { day: "2-digit", timeZone: "UTC" });
                             var units = (this["unitDate" + axis] == "days") ? 1 : this.temporalUnits["days"].unitsToLast;
                             drawLabel.call(this, data, units, currentValue, cumulativeUnits, axis, "top");
