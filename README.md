@@ -604,3 +604,5 @@ There are some considerations to keep acount of:
 	<li>Dates will be treated internally as UTC</li>
 	<li>If we select any reticule mark of lesser magnitude than our temporal unit it will be ignored</li>
 </ul>
+
+<a href="http://jsfiddle.net/bardobrave/2mo82zz2/" target="_blank">Fiddle with examples</a>
