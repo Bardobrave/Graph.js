@@ -567,7 +567,7 @@ if (GraphBrowserCompatibility) {
                         return currentValue != minValue && (currentValue == maxValue || myDate.getUTCMinutes() != myPreviousDate.getUTCMinutes());
                     },
                     parseDate: function (date) {
-                        date = date.substr(0, 16); //Se eliminan los segundos.
+                        date = date.substr(0, 16) + ":00"; //Se eliminan los segundos.
                         return Date.parse(date + " UTC") / this.temporalUnits["minutes"].dateMultiplier;
                     },
                     loadParsedDate: function (date) {
@@ -592,7 +592,7 @@ if (GraphBrowserCompatibility) {
                         return currentValue != minValue && (currentValue == maxValue || myDate.getUTCHours() != myPreviousDate.getUTCHours());
                     },
                     parseDate: function (date) {
-                        date = date.substr(0, 13); //Se eliminan minutos y segundos
+                        date = date.substr(0, 13) + ":00"; //Se eliminan minutos y segundos
                         return Date.parse(date + " UTC") / this.temporalUnits["hours"].dateMultiplier;
                     },
                     loadParsedDate: function (date) {
