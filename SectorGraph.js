@@ -86,7 +86,6 @@
             this._ringRatio = (object.hasOwnProperty("ringWidth") && object.ringWidth < this.radius) ? object.ringWidth / this.radius
                 : (this._originalRingRatio != undefined && this._originalRingRatio < 1) ? this._originalRingRatio
                 : (this._ringRatio != undefined && this._ringRatio < 1) ? this._ringRatio : 0;
-            this.percentage = (object.hasOwnProperty("percentage")) ? object.percentage : (this.percentage != undefined) ? this.percentage : false;
             this.borderColor = (object.hasOwnProperty("borderColor")) ? object.borderColor : (this.borderColor != undefined) ? this.borderColor
                 : "#fff";
             this.lineWidth = (object.hasOwnProperty("lineWidth")) ? object.lineWidth : (this.lineWidth != undefined) ? this.lineWidth : 1;
@@ -97,9 +96,11 @@
             this._yCenter = this.paddingHeight + (this._graphY / 2);
             this._xCenter0 = this._xCenter;
             this._yCenter0 = this._yCenter;
-
-            if (this.colors.length < 2)
-                this.colors[0] = "#F00"; this.colors[1] = "#0F0";
+            
+            if (this.colors.length < 2) {
+                this.colors[0] = "#F00";
+                this.colors[1] = "#0F0";
+            }
 
             return ok;
         }
