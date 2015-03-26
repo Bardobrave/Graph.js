@@ -220,7 +220,8 @@
     LinearGraph.prototype.MouseHover = function (element, event) {
         var left = (event.pageX || (event.clientX + scrollLeft)) + 10;
         var top = event.pageY || (event.clientY + scrollTop);
-        this.layer.innerHTML = "Val: " + element.y;
+        var value = (this.isDateY) ? this.temporalUnits[this.unitDateY].loadParsedDate.call(this, element.y).toLocaleDateString() : element.y;
+        this.layer.innerHTML = "Val: " + ((this.percentage) ? value + " %" : value);
         this.layer.style.left = left + "px";
         this.layer.style.top = top + "px";
         this.layer.style.display = "block";
