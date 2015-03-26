@@ -155,7 +155,7 @@ if (GraphBrowserCompatibility) {
                     if (this._xCenter0 == this._xCenter && this._yCenter0 == this._yCenter)
                         this.context.fillText("0", this._xCenter0 - 5, this._yCenter0 + 12);
                     else
-                        this.context.fillText("0", this._xCenter - 12, this._yCenter0 + 5);
+                        this.context.fillText("0", this._xCenter - 10, this._yCenter0 + 5);
                 } else
                     this.context.fillRect(this._xCenter, this._yCenter, this._graphX, 1);
             },
@@ -229,7 +229,8 @@ if (GraphBrowserCompatibility) {
                             this.context.fillRect(Math.round(this._xCenter + xOffset), this._yCenter, 1, -this._graphY);
                             if (x != 0) {
                                 this.context.fillStyle = "#000";
-                                this.context.fillText(x, this._xCenter + xOffset, this._yCenter + 12)
+                                this.context.fillText((this.percentage && !this.horizontalLayout) ? x + "%" : x, this._xCenter + xOffset,
+                                    this._yCenter + 12)
                             }
                             xOffset += this._offsetIncreaseX;
                         }
@@ -275,12 +276,14 @@ if (GraphBrowserCompatibility) {
                             }
                         }
                     } else {
+                        this.context.textAlign = "right";
                         for (var y = this.minY; y <= this.maxY; y = y + this.unitStepY) {
                             this.context.fillStyle = "#DDD";
                             this.context.fillRect(this._xCenter, Math.round(this._yCenter - yOffset), this._graphX, 1);
                             if (y != 0) {
                                 this.context.fillStyle = "#000";
-                                this.context.fillText(y, this._xCenter - 12, this._yCenter - yOffset + 5);
+                                this.context.fillText((this.percentage && this.horizontalLayout) ? y + "%" : y, this._xCenter - 7,
+                                    this._yCenter - yOffset + 5);
                             }
                             yOffset += this._offsetIncreaseY;
                         }
@@ -401,6 +404,8 @@ if (GraphBrowserCompatibility) {
                 //Método interno que obiene el siguiente entero mayor en base a un orden. Se usa para obtener los valores límite a 
                 //partir de los valores contenidos en el array de datos cuando el usuario no determina valores límite.
                 function getNextBiggerIntInOrder(i) {
+                    if (i != parseInt(i))
+                        i = (i > 0) ? Math.ceil(i) : Math.floor(i);
                     var ponderValue = (i.toString().length == 1) ? 10 : (i.toString().length - 1) * 10;
                     return (i > 0) ? Math.ceil(i / ponderValue) * ponderValue : Math.floor(i / ponderValue) * ponderValue;
                 }
@@ -446,7 +451,7 @@ if (GraphBrowserCompatibility) {
                 //Cálculo de los valores máximos y mínimos que representará la gráfica en función de los datos almacenados en data y el object pasado
                 calculateAxisRange.call(this, "x", object);
                 calculateAxisRange.call(this, "y", object);
-
+                
                 //Asignación del punto de inicio de dibujo de la gráfica y del ancho de la misma en base al padding definido por el usuario.
                 if (!this._originalPaddingWidth || object.hasOwnProperty("paddingWidth"))
                     this._originalPaddingWidth = (object.hasOwnProperty("paddingWidth")) ? object.paddingWidth : this.paddingWidth;
@@ -489,6 +494,9 @@ if (GraphBrowserCompatibility) {
                 this.labelsX = (object.hasOwnProperty("labelsX")) ? object.labelsX : (this.labelsX) ? this.labelsX : null;
                 this.labelsY = (object.hasOwnProperty("labelsY")) ? object.labelsY : (this.labelsY) ? this.labelsY : null;
 
+                //Indica si los valores de la gráfica son porcentajes
+                this.percentage = (object.hasOwnProperty("percentage")) ? object.percentage : (this.percentage != undefined) ? this.percentage : false;
+                
                 //Flag para desactivar la gestión de eventos
                 this.disableEvents = (object.hasOwnProperty("disableEvents")) ? object.disableEvents : this.disableEvents;
 
