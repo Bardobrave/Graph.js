@@ -180,6 +180,15 @@ Seconds, minutes, days and weekdays are print on Graph's top, while hours, month
 			represented on Graph</td>
 		</tr>
 		<tr>
+			<td>percentage</td>
+			<td>false</td>
+			<td>boolean</td>
+			<td>When set to true, reticules shows "%" characters next to value axis, and event tooltip shows also this character inside it's value. <br/>On SectorGraphs, when set to true, outside the sectors of the SectorGraph the percentage value of each sector is shown, while the numeric value is
+			shown on the layer tooltip that shows on mouse over events. When set to false, the labels on the outside of the sectors are the numeric values
+			while the values on the event tooltip are the percentage ones.
+			</td>
+		</tr>
+		<tr>
 			<td>onClick</td>
 			<td>null</td>
 			<td>callback</td>
@@ -485,15 +494,6 @@ Specific features
 			<td>1</td>
 			<td>Numeric</td>
 			<td>The border with in pixels for each sector on the SectorGraph</td>
-		</tr>
-		<tr>
-			<td>percentage</td>
-			<td>false</td>
-			<td>boolean</td>
-			<td>When set to true, outside the sectors of the SectorGraph the percentage value of each sector is shown, while the numeric value is
-			shown on the layer tooltip that shows on mouse over events. When set to false, the labels on the outside of the sectors are the numeric values
-			while the values on the event tooltip are the percentage ones.
-			</td>
 		</tr>
 		<tr>
 			<td>radius</td>
