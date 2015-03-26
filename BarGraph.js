@@ -269,7 +269,7 @@
                 }
             }
         }
-
+        
         //Se dibuja el eje de coordenadas
         this.drawAxis();
     }
@@ -278,7 +278,10 @@
     BarGraph.prototype.MouseHover = function (element, event) {
         var left = (event.pageX || (event.clientX + scrollLeft)) + 10;
         var top = event.pageY || (event.clientY + scrollTop);
-        this.layer.innerHTML = "Val: " + ((this.horizontalLayout) ? element.y : element.x);
+        var value = (this.horizontalLayout) ? ((this.isDateY) ? this.temporalUnits[this.unitDateY].loadParsedDate.call(this, element.y).
+            toLocaleDateString() : element.y) : ((this.isDateX) ? this.temporalUnits[this.unitDateX].loadParsedDate.call(this, element.x).
+            toLocaleDateString() : element.x);
+        this.layer.innerHTML = "Val: " + ((this.percentage) ? value + " %" : value);
         this.layer.style.left = left + "px";
         this.layer.style.top = top + "px";
         this.layer.style.display = "block";
