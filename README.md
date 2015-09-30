@@ -236,6 +236,24 @@ Seconds, minutes, days and weekdays are print on Graph's top, while hours, month
 			given on the previous drawing</td>
 		</tr>
 		<tr>
+			<td>stepX</td>
+			<td>Depend on data</td>
+			<td>Number</td>
+			<td>A number which represent the amount of X axis units that will separate axis marks. If the axis range isn't divisible by the passed
+			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
+			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a X axis from 0 to 10 and we define stepX: 3,
+			Graph will use a stepX of 2 instead, drawing marks at 2, 4, 6 and 8 values.</td>
+		</tr>
+		<tr>
+			<td>stepY</td>
+			<td>Depend on data</td>
+			<td>Number</td>
+			<td>A number which represent the amount of Y axis units that will separate axis marks. If the axis range isn't divisible by the passed
+			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
+			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a Y axis from 0 to 10 and we define stepY: 3,
+			Graph will use a stepY of 2 instead, drawing marks at 2, 4, 6, and 8 values.</td>
+		</tr>
+		<tr>
 			<td>title</td>
 			<td>null</td>
 			<td>String</td>
@@ -252,24 +270,6 @@ Seconds, minutes, days and weekdays are print on Graph's top, while hours, month
 			<td>"days"</td>
 			<td>string</td>
 			<td>A string that determines, when the Y axis representates dates, which will be the unit used to measure data. It accept the following values: "seconds", "minutes", "hours", "days", "months" and "years".</td>
-		</tr>
-		<tr>
-			<td>unitStepX</td>
-			<td>Depend on data</td>
-			<td>Number</td>
-			<td>A number which represent the amount of X axis units that will separate axis marks. If the axis range isn't divisible by the passed
-			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
-			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a X axis from 0 to 10 and we define unitStepX: 3,
-			Graph will use a unitStepX of 2 instead, drawing marks at 2, 4, 6 and 8 values.</td>
-		</tr>
-		<tr>
-			<td>unitStepY</td>
-			<td>Depend on data</td>
-			<td>Number</td>
-			<td>A number which represent the amount of Y axis units that will separate axis marks. If the axis range isn't divisible by the passed
-			value, or if there is no passed value at all, Graph will use the lesser possible number that divides the axis range in equal parts
-			and is lesser than the fifth part of the axis range. For example, if we have a Graph with a Y axis from 0 to 10 and we define unitStepY: 3,
-			Graph will use a unitStepY of 2 instead, drawing marks at 2, 4, 6, and 8 values.</td>
 		</tr>
 		<tr>
 			<td>weeksStartsOnSundays</td>
