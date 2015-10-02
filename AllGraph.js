@@ -1,4 +1,4 @@
-/* Graph.js v.0.1.1
+/* Graph.js v.0.1.2
   Simple yet powerful API for graphs creation.
   File is divided on 5 classes:
   Graph: Master class that defines specific code common to every graphic class.
@@ -14,6 +14,8 @@
     -Gestión de errores cuando nos pasen estructuras data que no sean válidas
     -¿Eventos para mover la gráfica hacia adelante y hacia atrás en el eje X? ¿Animación para desplazar los valores al mover la gráfica?
     -¿Graficas de sectores muestran algunos sectores sin borde cuando el color está cerca del blanco?
+    -Que las marcas se oculten cuando estén demasiado cerca de los destacados en función del tamaño de letra.
+    -Que se puedan marcar destacados temporales en unidades distintas de días
     -Refactorizar
 */
 
@@ -241,15 +243,44 @@ if (GraphBrowserCompatibility) {
                                     order++;
                                 }
                             }
+                            //Tras dibujar todas las unidades se recorren, si existieran, las marcas destacadas, dibujándose encima
+                            //TO DO: Permitir marcas temporales en otras unidades que no sean días.
+                            for (var remark in this.remarksX) {
+                                this.context.fillStyle = "#F00";
+                                var currentMarkValue = this.temporalUnits["days"].parseDate.call(this, this.remarksX[remark]) + 1;
+                                var myDate = this.temporalUnits["days"].loadParsedDate.call(this, currentMarkValue);
+                                var myPreviousDate = this.temporalUnits["days"].loadParsedDate.call(this, currentMarkValue - 1);
+                                this.context.fillRect(Math.round(this._xCenter + ((currentMarkValue - this.minX) * this._unitX)), this._yCenter,
+                                    1, -this._graphY);
+                                this.temporalUnits["days"].label.call(this, currentMarkValue, myDate, myPreviousDate, 0, "X", language);
+                            }
                         }
                     } else {
                         for (var x = this.minX; x <= this.maxX; x = x + this.unitStepX) {
-                            this.context.fillStyle = "#DDD";
-                            this.context.fillRect(Math.round(this._xCenter + xOffset), this._yCenter, 1, -this._graphY);
-                            if (x != 0) {
-                                this.context.fillStyle = "#000";
-                                this.context.fillText((this.percentage && !this.horizontalLayout) ? x + "%" : x, this._xCenter + xOffset,
-                                    this._yCenter + 12)
+                            if (this.remarksX != undefined) {
+                                var ignoreMark = false;
+                                var currentPointXPos = 0;
+                                //Si hay que dibujar marcas, se pintan todas las que haya menores o iguales que el punto en curso
+                                while (this._indexRemarksX < this.remarksX.length && this.remarksX[this._indexRemarksX] <= x) {
+                                    this.context.fillStyle = "#F00";
+                                    currentPointXPos = this.remarksX[this._indexRemarksX] * this._unitX;
+                                    this.context.fillRect(Math.round(this._xCenter0 + currentPointXPos), this._yCenter, 1, -this._graphY);
+                                    this.context.fillText(this.remarksX[this._indexRemarksX], this._xCenter0 + currentPointXPos, this._yCenter + 12);
+                                    this._indexRemarksX++;
+                                }
+                                //Se comprueba si la marca que toca dibujar está demasiado cerca del último destacado o del próximo
+                                ignoreMark = (this._xCenter0 + currentPointXPos + this._pixelDeviationX >= Math.round(this._xCenter + xOffset)
+                                    || (this._indexRemarksX < this.remarksX.length && this._xCenter + xOffset + this._pixelDeviationX
+                                    >= this._xCenter0 + this.remarksX[this._indexRemarksX] * this._unitX));
+                            }
+                            if (!ignoreMark) {
+                                this.context.fillStyle = "#DDD";
+                                this.context.fillRect(Math.round(this._xCenter + xOffset), this._yCenter, 1, -this._graphY);
+                                if (x != 0) {
+                                    this.context.fillStyle = "#000";
+                                    this.context.fillText((this.percentage && !this.horizontalLayout) ? x + "%" : x, this._xCenter + xOffset,
+                                        this._yCenter + 12)
+                                }
                             }
                             xOffset += this._offsetIncreaseX;
                         }
@@ -293,16 +324,46 @@ if (GraphBrowserCompatibility) {
                                     order++;
                                 }
                             }
+                            //Tras dibujar todas las unidades se recorren, si existieran, las marcas destacadas, dibujándose encima
+                            //TO DO: Permitir marcas temporales en unidades que no sean sólo días.
+                            for (var remark in this.remarksY) {
+                                this.context.fillStyle = "#F00";
+                                var currentMarkValue = this.temporalUnits["days"].parseDate.call(this, this.remarksY[remark]) + 1;
+                                var myDate = this.temporalUnits["days"].loadParsedDate.call(this, currentMarkValue);
+                                var myPreviousDate = this.temporalUnits["days"].loadParsedDate.call(this, currentMarkValue - 1);
+                                this.context.fillRect(this._xCenter, Math.round(this._yCenter - ((currentMarkValue - this.minY) * this._unitY)),
+                                    this._graphX, 1);
+                                this.temporalUnits["days"].label.call(this, currentMarkValue, myDate, myPreviousDate, 0, "Y", language);
+                            }
                         }
                     } else {
                         this.context.textAlign = "right";
                         for (var y = this.minY; y <= this.maxY; y = y + this.unitStepY) {
-                            this.context.fillStyle = "#DDD";
-                            this.context.fillRect(this._xCenter, Math.round(this._yCenter - yOffset), this._graphX, 1);
-                            if (y != 0) {
-                                this.context.fillStyle = "#000";
-                                this.context.fillText((this.percentage && this.horizontalLayout) ? y + "%" : y, this._xCenter - 7,
-                                    this._yCenter - yOffset + 5);
+                            if (this.remarksY != undefined) {
+                                var ignoreMark = false;
+                                var currentPointYPos = 0;
+                                //Si hay que dibujar marcas, se pintan todas las que haya menores o iguales que el punto en curso
+                                while (this._indexRemarksY < this.remarksY.length && this.remarksY[this._indexRemarksY] <= y) {
+                                    this.context.fillStyle = "#F00";
+                                    currentPointYPos = this.remarksY[this._indexRemarksY] * this._unitY;
+                                    this.context.fillRect(this._xCenter, Math.round(this._yCenter0 - currentPointYPos), this._graphX, 1);
+                                    this.context.fillText(this.remarksY[this._indexRemarksY], this._xCenter - 7, Math.round(this._yCenter0
+                                        - currentPointYPos + 5));
+                                    this._indexRemarksY++;
+                                }
+                                //Se comprueba si la marca que toca dibujar está demasiado cerca del último destacado o del próximo
+                                ignoreMark = (this._yCenter0 - currentPointYPos - this._pixelDeviationY <= Math.round(this._yCenter - yOffset)
+                                    || (this._indexRemarksY < this.remarksY.length && this._yCenter - yOffset - this._pixelDeviationY
+                                    <= this._yCenter0 - this.remarksY[this._indexRemarksY] * this._unitY));
+                            }
+                            if (!ignoreMark) {
+                                this.context.fillStyle = "#DDD";
+                                this.context.fillRect(this._xCenter, Math.round(this._yCenter - yOffset), this._graphX, 1);
+                                if (y != 0) {
+                                    this.context.fillStyle = "#000";
+                                    this.context.fillText((this.percentage && this.horizontalLayout) ? y + "%" : y, this._xCenter - 7,
+                                        this._yCenter - yOffset + 5);
+                                }
                             }
                             yOffset += this._offsetIncreaseY;
                         }
@@ -379,10 +440,19 @@ if (GraphBrowserCompatibility) {
                             this[maxAxis] = Math.max.apply(axisArray, axisArray);
                             this[minAxis] = Math.min.apply(axisArray, axisArray);
                         }
+                        if (this["remarks" + bigAxis] != undefined) {
+                            this[maxAxis] = Math.max(this[maxAxis], new Date(this["remarks" + bigAxis][this["remarks" + bigAxis].length
+                                - 1]).valueOf() / 86400000);
+                            this[minAxis] = Math.min(this[minAxis], new Date(this["remarks" + bigAxis][0]).valueOf() / 86400000);
+                        }
                     } else {
                         var maxVal = Math.max.apply(axisArray, axisArray), minVal = Math.min.apply(axisArray, axisArray);
                         this[maxAxis] = (this["_dontExtendAxis" + bigAxis]) ? maxVal : getNextBiggerIntInOrder(maxVal);
                         this[minAxis] = (minVal > 0) ? 0 : (this["_dontExtendAxis" + bigAxis]) ? minVal : getNextBiggerIntInOrder(minVal);
+                        if (this["remarks" + bigAxis] != undefined) {
+                            this[maxAxis] = Math.max(this[maxAxis], this["remarks" + bigAxis][this["remarks" + bigAxis].length - 1]);
+                            this[minAxis] = Math.min(this[minAxis], this["remarks" + bigAxis][0]);
+                        }
                     }
 
                     //Conversión de los valores máximos pasados por parámetros de tipo fecha a número de días desde la fecha 0 para el eje en curso.
@@ -445,6 +515,37 @@ if (GraphBrowserCompatibility) {
                     return Date.parse(dateLimit.toString() + " UTC") / 86400000;
                 }
 
+                //Método que inicializa los destacados de un eje. Para ello comprueba que todos sus valores sean números o fechas si
+                //el eje almacena datos de fecha, los ordena e inicializa el índice asociado a los destacados.
+                function initRemarks(axis) {
+                    var remarksAttribute = "remarks" + axis;
+                    var valid = true;
+                    if (this["isDate" + axis]) {
+                        for (var index in this[remarksAttribute]) {
+                            var currentData = new Date(this[remarksAttribute][index]);
+                            if (!currentData instanceof Date || isNaN(currentData.valueOf())) {
+                                this[remarksAttribute] = undefined;
+                                return false;
+                            }
+                        }
+                        this[remarksAttribute] = this[remarksAttribute].sort();
+                    } else {
+                        for (var index in this[remarksAttribute]) {
+                            if (isNaN(this[remarksAttribute][index])) {
+                                this[remarksAttribute] = undefined;
+                                return false;
+                            }
+                        }
+                        this[remarksAttribute] = this[remarksAttribute].sort(function (a, b) { return a - b; }); //ordenación de valores numéricos
+                    }
+                    this["_indexRemarks" + axis] = 0;
+                }
+
+                //Constantes para determinar si las marcas y los destacados están demasiado cerca. 
+                //TO DO: Hacer que se calculen en función del tamaño de la fuente
+                this._pixelDeviationX = 20;
+                this._pixelDeviationY = 10;
+
                 //Si se ha indicado un tamaño específico para el que se ha diseñado la gráfica se marca dicho tamaño como originalWidth
                 this._originalWidth = (object.hasOwnProperty("designWidth")) ? object.designWidth : this._originalWidth;
 
@@ -466,6 +567,17 @@ if (GraphBrowserCompatibility) {
                 //Indicación de si alguno de los ejes de coordenadas representa fechas
                 this.isDateX = (object.hasOwnProperty("isDateX")) ? object.isDateX : this.isDateX;
                 this.isDateY = (object.hasOwnProperty("isDateY")) ? object.isDateY : this.isDateY;
+
+                //Arrays de destacados, si los hubiera
+                this.remarksX = (object.hasOwnProperty("remarksX")) ? object.remarksX : this.remarksX;
+                this.remarksY = (object.hasOwnProperty("remarksY")) ? object.remarksY : this.remarksY;
+
+                //Si hay destacados deben ordenarse e inicializarse los contadores
+                if (this.remarksX != undefined) 
+                    initRemarks.call(this, "X");
+
+                if (this.remarksY != undefined)
+                    initRemarks.call(this, "Y");
 
                 //Cálculo de los valores máximos y mínimos que representará la gráfica en función de los datos almacenados en data y el object pasado
                 calculateAxisRange.call(this, "x", object);
