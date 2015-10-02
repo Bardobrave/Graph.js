@@ -27,6 +27,8 @@ Here is a brief list of different things that I'd like to add to the API before 
 	<li>Titles and legends should position themselves and reserve space depending on fontSize and available space</li>
 	<li>System should be able to generate clean error messages when invalid data structures are passed. Actually API already does it, however more testing is needed to ensure enough stability on this matter.</li>
 	<li>Some minor fixes and improvements derived from allowing more date data types.</li>
+	<li>Allow marks to get overriden by remarks depending on font size</li>
+	<li>Allow marks on temporal axises on different units than days</li>
 </ul>
 
 # How to use it
@@ -224,6 +226,18 @@ Seconds, minutes, days and weekdays are print on Graph's top, while hours, month
 			<td>100</td>
 			<td>Number</td>
 			<td>Number of pixels that will be used as horizontal padding on each side of the Graph.</td>
+		</tr>
+		<tr>
+			<td>remarksX</td>
+			<td>undefined</td>
+			<td>Array</td>
+			<td>This array defines points in the X axis values that must be remarked. A red mark is drawn along the Y axis at each remarked X point value. Other marks on the axis closer than 20px to the remarked point are omitted. If any remark is out of calculated or marked boundaries of the axis range, it becomes the new axis limit.</td>
+		</tr>
+		<tr>
+			<td>remarksY</td>
+			<td>undefined</td>
+			<td>Array</td>
+			<td>This array defines points in the Y axis values that must be remarked. A red mark is drawn along the X axis at each remarked Y point value. Other marks on the axis closer than 10px to the remarked point are omitted. If any remark is out of calculated or marked boundaries of the axis range, it becomes the new axis limit.</td>
 		</tr>
 		<tr>
 			<td>resizable</td>
