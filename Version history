@@ -1,5 +1,7 @@
 #Version history
 
+v0.1.4 - Fix a bug related to scrollTop calculation being inconsistent between browsers.
+
 v0.1.3 - Fix an error with graphs that include hour change dates
 
 v0.1.2 - Added the possibility to add remarks to graph axises.
