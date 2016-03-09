@@ -1,4 +1,4 @@
-/* Graph.js v.0.1.3
+/* Graph.js v.0.1.4
   Simple yet powerful API for graphs creation.
   File is divided on 5 classes:
   Graph: Master class that defines specific code common to every graphic class.
@@ -143,8 +143,8 @@ if (GraphBrowserCompatibility) {
             var currentElement = this.canvasObj;
 
             do {
-                totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-                totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+                totalOffsetX += currentElement.offsetLeft /*- currentElement.scrollLeft*/; //FIX for inconsistent behaviour between FF and Chrome
+                totalOffsetY += currentElement.offsetTop /*- currentElement.scrollTop*/;
             }
             while (currentElement = currentElement.offsetParent)
 
