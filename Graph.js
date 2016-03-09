@@ -122,8 +122,8 @@ if (GraphBrowserCompatibility) {
             var currentElement = this.canvasObj;
 
             do {
-                totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-                totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+                totalOffsetX += currentElement.offsetLeft /*- currentElement.scrollLeft*/; //FIX to scrollTop inconsistencies between browsers
+                totalOffsetY += currentElement.offsetTop /*- currentElement.scrollTop*/;
             }
             while (currentElement = currentElement.offsetParent)
 
