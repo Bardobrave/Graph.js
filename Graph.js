@@ -718,7 +718,7 @@ if (GraphBrowserCompatibility) {
                 }, "days": {
                     dateMultiplier: 86400000, order: 3, markColor: "#ddd", position: "top",
                     checkTempUnitChange: function (myDate, myPreviousDate, currentValue, maxValue, minValue) {
-                        return currentValue != minValue && (currentValue == maxValue || myDate.getUTCDate() != myPreviousDate.getUTCDate());
+                        return currentValue != minValue && (parseInt(currentValue) == parseInt(maxValue) || myDate.getUTCDate() != myPreviousDate.getUTCDate());
                     },
                     parseDate: function (date) {
                         date = date.substr(0, 10); //Eliminación de las horas
@@ -764,7 +764,7 @@ if (GraphBrowserCompatibility) {
                 "months": {
                     dateMultiplier: 86400000, order: 5, markColor: "#333", position: "bottom",
                     checkTempUnitChange: function (myDate, myPreviousDate, currentValue, maxVal, minVal) {
-                        return currentValue != minVal && (currentValue == maxVal || myDate.getMonth() != myPreviousDate.getMonth());
+                        return currentValue != minVal && (parseInt(currentValue) == parseInt(maxVal) || myDate.getMonth() != myPreviousDate.getMonth());
                     },
                     parseDate: function (date, axis) {
                         var loadedDate = new Date(date + " UTC");
@@ -798,7 +798,7 @@ if (GraphBrowserCompatibility) {
                 "years": {
                     dateMultiplier: 86400000, order: 6, markColor: "#000", position: "bottom",
                     checkTempUnitChange: function (myDate, myPreviousDate, currentValue, maxVal, minVal) {
-                        return currentValue != minVal && (currentValue == maxVal || myDate.getFullYear() != myPreviousDate.getFullYear());
+                        return currentValue != minVal && (parseInt(currentValue) == parseInt(maxVal) || myDate.getFullYear() != myPreviousDate.getFullYear());
                     },
                     parseDate: function (date, axis) {
                         var loadedDate = new Date(date + " UTC");
